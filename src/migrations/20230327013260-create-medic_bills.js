@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('medic_bills', {
+    await queryInterface.createTable("medic_bills", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -16,35 +16,41 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'clients',
-          key: 'id',
+          model: "clients",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       service_id: {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'services',
-          key: 'id',
+          model: "services",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       bank_id: {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'banks',
-          key: 'id',
+          model: "banks",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       contract_id: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.UUID,
+        references: {
+          model: "contracts",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       dependent_name: {
         allowNull: true,
@@ -101,16 +107,17 @@ module.exports = {
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
+
   async down(queryInterface) {
-    await queryInterface.dropTable('medic_bills');
+    await queryInterface.dropTable("medic_bills");
   },
 };

@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('contracts', {
+    await queryInterface.createTable("contracts", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -16,24 +16,24 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'clients',
-          key: 'id',
+          model: "clients",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       billing_priority_id: {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'billing_priorities',
-          key: 'id',
+          model: "billing_priorities",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       priority: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       beneficiary: {
@@ -42,29 +42,31 @@ module.exports = {
       },
       value: {
         allowNull: false,
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10, 2),
       },
       date: {
         allowNull: false,
         type: Sequelize.DATEONLY,
       },
       can_show: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
+
   async down(queryInterface) {
-    await queryInterface.dropTable('contracts');
+    await queryInterface.dropTable("contracts");
   },
 };

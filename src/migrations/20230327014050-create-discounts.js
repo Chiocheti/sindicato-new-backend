@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('discounts', {
+    await queryInterface.createTable("discounts", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -13,57 +13,62 @@ module.exports = {
         },
       },
       title: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING,
       },
       content: {
+        allowNull: false,
         type: Sequelize.TEXT,
-        allowNull: true,
       },
       image_link: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING,
       },
       infos: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING,
       },
-      time: {
-        allowNull: true,
+      date: {
+        allowNull: false,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
         },
       },
       is_health: {
-        type: Sequelize.BOOLEAN,
         allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       is_education: {
-        type: Sequelize.BOOLEAN,
         allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       is_business: {
-        type: Sequelize.BOOLEAN,
         allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       is_services: {
-        type: Sequelize.BOOLEAN,
         allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
+
   async down(queryInterface) {
-    await queryInterface.dropTable('discounts');
+    await queryInterface.dropTable("discounts");
   },
 };

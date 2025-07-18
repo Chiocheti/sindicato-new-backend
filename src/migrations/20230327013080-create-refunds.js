@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('refunds', {
+    await queryInterface.createTable("refunds", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -16,31 +16,31 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'clients',
-          key: 'id',
+          model: "clients",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       dependent_id: {
         allowNull: true,
         type: Sequelize.UUID,
         references: {
-          model: 'dependents',
-          key: 'id',
+          model: "dependents",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       specialty_id: {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'specialties',
-          key: 'id',
+          model: "specialties",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       order: {
         allowNull: false,
@@ -56,25 +56,25 @@ module.exports = {
       },
       invoice_value: {
         allowNull: false,
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10, 2),
       },
       refund_value: {
         allowNull: false,
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10, 2),
       },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('refunds');
+    await queryInterface.dropTable("refunds");
   },
 };

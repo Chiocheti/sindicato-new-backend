@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('configs', {
+    await queryInterface.createTable("configs", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -15,10 +15,6 @@ module.exports = {
       amount: {
         allowNull: false,
         type: Sequelize.DECIMAL(10, 2),
-      },
-      check_number: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
       },
       receiver_number: {
         allowNull: false,
@@ -45,16 +41,16 @@ module.exports = {
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('configs');
+    await queryInterface.dropTable("configs");
   },
 };

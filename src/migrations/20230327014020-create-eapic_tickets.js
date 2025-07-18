@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('eapic_tickets', {
+    await queryInterface.createTable("eapic_tickets", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -16,21 +16,21 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'eapic_clients',
-          key: 'id',
+          model: "eapic_clients",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       eapic_show_id: {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'eapic_shows',
-          key: 'id',
+          model: "eapic_shows",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       name: {
         allowNull: true,
@@ -51,16 +51,16 @@ module.exports = {
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('eapic_tickets');
+    await queryInterface.dropTable("eapic_tickets");
   },
 };

@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('contributions', {
+    await queryInterface.createTable("contributions", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -16,48 +16,50 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID,
         references: {
-          model: 'clients',
-          key: 'id',
+          model: "clients",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       ente: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: true,
       },
       salary: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
+        allowNull: false,
+        type: Sequelize.DECIMAL(10, 2),
       },
       discount: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
+        allowNull: false,
+        type: Sequelize.DECIMAL(10, 2),
       },
       date: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
         },
       },
       description: {
-        type: Sequelize.STRING,
         allowNull: true,
+        defaultValue: null,
+        type: Sequelize.STRING,
       },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
+
   async down(queryInterface) {
-    await queryInterface.dropTable('contributions');
+    await queryInterface.dropTable("contributions");
   },
 };

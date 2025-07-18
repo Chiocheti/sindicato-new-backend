@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('billing_priorities', {
+    await queryInterface.createTable("billing_priorities", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -13,27 +13,27 @@ module.exports = {
         },
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING,
-        allowNull: true,
       },
       value: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('billing_priorities');
+    await queryInterface.dropTable("billing_priorities");
   },
 };
