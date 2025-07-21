@@ -24,7 +24,6 @@ module.exports = {
       },
       code: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       order: {
@@ -33,7 +32,6 @@ module.exports = {
       },
       admission_date: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
@@ -41,7 +39,6 @@ module.exports = {
       },
       dismissal_date: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
@@ -54,27 +51,22 @@ module.exports = {
       },
       dismissal_reason: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       ente: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       salary: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DECIMAL(10, 2),
       },
       discount: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DECIMAL(10, 2),
       },
       monthly_type: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {

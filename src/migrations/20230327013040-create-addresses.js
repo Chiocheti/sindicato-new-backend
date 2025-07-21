@@ -24,37 +24,30 @@ module.exports = {
       },
       street_name: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       number: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       complement: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       neighborhood: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       city: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       state: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       postal_code: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {

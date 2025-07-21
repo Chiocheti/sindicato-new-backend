@@ -32,7 +32,6 @@ module.exports = {
       },
       image_link: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       password: {
@@ -51,12 +50,10 @@ module.exports = {
       },
       ente: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       birthdate: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
@@ -64,7 +61,6 @@ module.exports = {
       },
       admission_date: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
@@ -72,7 +68,6 @@ module.exports = {
       },
       email: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
         validate: {
           isEmail: true,
@@ -80,32 +75,26 @@ module.exports = {
       },
       id_card_number: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       issuing_agency: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       gender: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       marital_status: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       education_level: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       details: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       monthly_credit: {
@@ -123,42 +112,34 @@ module.exports = {
       },
       phone01: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       phone02: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       bank_account: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       bank_agency: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       bank_code: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       company_code: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       pix_key: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       pix_type: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       associate: {
@@ -172,7 +153,6 @@ module.exports = {
       },
       beginning_date: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
@@ -180,7 +160,6 @@ module.exports = {
       },
       retirement_date: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
@@ -188,7 +167,6 @@ module.exports = {
       },
       re_registration: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
         validate: {
           isDate: true,
@@ -196,37 +174,30 @@ module.exports = {
       },
       work_place: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       department: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       section: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       occupation: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       monthly_type: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       mother_name: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       father_name: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {

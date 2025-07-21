@@ -36,7 +36,6 @@ module.exports = {
       },
       confirmation_date: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
       },
       doc: {
@@ -61,7 +60,6 @@ module.exports = {
       },
       details: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {
