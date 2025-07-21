@@ -29,22 +29,18 @@ module.exports = {
       },
       name: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       birthdate: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
       },
       gender: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       relationship: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       documents: {

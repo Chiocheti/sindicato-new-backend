@@ -22,27 +22,22 @@ module.exports = {
       },
       cnpj: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       mail: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       phone01: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       phone02: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       phone03: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {

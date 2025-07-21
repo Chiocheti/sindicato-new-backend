@@ -52,22 +52,18 @@ module.exports = {
       },
       name: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       cpf: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       phone: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       value: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DECIMAL(10, 2),
       },
       pay_style: {
@@ -76,17 +72,14 @@ module.exports = {
       },
       pay_date_first: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
       },
       pay_date_second: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.DATEONLY,
       },
       description: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {

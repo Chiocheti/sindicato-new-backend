@@ -30,7 +30,6 @@ module.exports = {
       },
       refresh_token: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {

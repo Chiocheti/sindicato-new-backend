@@ -43,7 +43,6 @@ module.exports = {
       },
       description: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {

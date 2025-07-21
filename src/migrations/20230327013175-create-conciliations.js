@@ -52,7 +52,6 @@ module.exports = {
       },
       details: {
         allowNull: true,
-        defaultValue: null,
         type: Sequelize.STRING,
       },
       created_at: {
