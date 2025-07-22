@@ -1,10 +1,8 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
-import Client from "./Client.model";
-import Contract from "./Contracts.model";
+import Contract from "./Contract.model";
 
 class Reservation extends Model {
   declare id: string;
@@ -29,15 +27,15 @@ Reservation.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     clientId: {
       allowNull: true,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clients",
         key: "id",
@@ -47,7 +45,7 @@ Reservation.init(
     },
     contractIdFirst: {
       allowNull: true,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "contracts",
         key: "id",
@@ -57,7 +55,7 @@ Reservation.init(
     },
     contractIdSecond: {
       allowNull: true,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "contracts",
         key: "id",
@@ -67,43 +65,43 @@ Reservation.init(
     },
     date: {
       allowNull: false,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     createDate: {
       allowNull: false,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     name: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     cpf: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     phone: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     value: {
       allowNull: true,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     payStyle: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     payDateFirst: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     payDateSecond: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     description: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
   },
   {
@@ -118,11 +116,6 @@ Reservation.init(
     },
   }
 );
-
-Reservation.belongsTo(Client, {
-  foreignKey: "clientId",
-  as: "client",
-});
 
 Reservation.belongsTo(Contract, {
   foreignKey: "contractIdFirst",

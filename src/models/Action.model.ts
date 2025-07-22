@@ -1,9 +1,7 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
-import User from "./User.model";
 
 class Action extends Model {
   declare id: string;
@@ -19,15 +17,15 @@ Action.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     userId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "users",
         key: "id",
@@ -37,11 +35,11 @@ Action.init(
     },
     action: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     reference: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
   },
   {
@@ -56,10 +54,5 @@ Action.init(
     },
   }
 );
-
-Action.belongsTo(User, {
-  foreignKey: "userId",
-  as: "user",
-});
 
 export default Action;

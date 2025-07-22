@@ -1,10 +1,8 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
 import Client from "./Client.model";
-import User from "./User.model";
 
 class ClientSearch extends Model {
   declare id: string;
@@ -19,15 +17,15 @@ ClientSearch.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     clientId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clients",
         key: "id",
@@ -37,7 +35,7 @@ ClientSearch.init(
     },
     userId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "users",
         key: "id",
@@ -47,7 +45,7 @@ ClientSearch.init(
     },
     used: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
   },
@@ -63,15 +61,5 @@ ClientSearch.init(
     },
   }
 );
-
-ClientSearch.belongsTo(Client, {
-  foreignKey: "clientId",
-  as: "client",
-});
-
-ClientSearch.belongsTo(User, {
-  foreignKey: "userId",
-  as: "user",
-});
 
 export default ClientSearch;
