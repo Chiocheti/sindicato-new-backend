@@ -10,7 +10,7 @@ authRoutes.put("/login", async (req: Request, res: Response) => {
 });
 
 authRoutes.put("/logout", authenticate, async (req: Request, res: Response) => {
-  await AuthController.login(req, res);
+  await AuthController.logout(req, res);
 });
 
 export default authRoutes;
