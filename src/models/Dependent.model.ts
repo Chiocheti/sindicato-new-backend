@@ -1,9 +1,7 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
-import Client from "./Client.model";
 
 class Dependent extends Model {
   declare id: string;
@@ -22,15 +20,15 @@ Dependent.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     clientId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clients",
         key: "id",
@@ -40,28 +38,28 @@ Dependent.init(
     },
     order: {
       allowNull: false,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       defaultValue: 0,
     },
     name: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     birthdate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     gender: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     relationship: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     documents: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
   },
@@ -77,10 +75,5 @@ Dependent.init(
     },
   }
 );
-
-Dependent.belongsTo(Client, {
-  foreignKey: "clientId",
-  as: "client",
-});
 
 export default Dependent;

@@ -1,6 +1,5 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
 import MedicBill from "./MedicBill.model";
@@ -22,39 +21,39 @@ Service.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     company: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     service: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     cnpj: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     mail: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     phone01: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     phone02: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     phone03: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
   },
   {
@@ -73,6 +72,11 @@ Service.init(
 Service.hasMany(MedicBill, {
   foreignKey: "serviceId",
   as: "medicBills",
+});
+
+MedicBill.belongsTo(Service, {
+  foreignKey: "serviceId",
+  as: "service",
 });
 
 export default Service;

@@ -2,16 +2,16 @@ import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 
 import db from "./";
+import User from "./User.model";
+import Role from "./Role.model";
 
-class Action extends Model {
+class UserRole extends Model {
   declare id: string;
-  declare clientId: string;
-  declare userId: string;
-  declare action: string;
-  declare reference: string | null;
+  declare roleId: string;
+  declare UserId: string;
 }
 
-Action.init(
+UserRole.init(
   {
     id: {
       allowNull: false,
@@ -23,6 +23,16 @@ Action.init(
         isUUID: 4,
       },
     },
+    roleId: {
+      allowNull: false,
+      type: DataTypes.UUID,
+      references: {
+        model: "roles",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    },
     userId: {
       allowNull: false,
       type: DataTypes.UUID,
@@ -33,18 +43,10 @@ Action.init(
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
-    action: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
-    reference: {
-      allowNull: true,
-      type: DataTypes.STRING,
-    },
   },
   {
     sequelize: db,
-    tableName: "actions",
+    tableName: "user_roles",
     timestamps: false,
     underscored: true,
     hooks: {
@@ -55,4 +57,4 @@ Action.init(
   }
 );
 
-export default Action;
+export default UserRole;

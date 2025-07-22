@@ -1,10 +1,10 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
 import Client from "./Client.model";
 import BillingPriority from "./BillingPriority.model";
+import MedicBill from "./MedicBill.model";
 
 class Contract extends Model {
   declare id: string;
@@ -23,15 +23,15 @@ Contract.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     clientId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clients",
         key: "id",
@@ -41,7 +41,7 @@ Contract.init(
     },
     billingPriorityId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "billing_priorities",
         key: "id",
@@ -51,23 +51,23 @@ Contract.init(
     },
     priority: {
       allowNull: false,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     beneficiary: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     value: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     date: {
       allowNull: false,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     canShow: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
   },
@@ -84,14 +84,14 @@ Contract.init(
   }
 );
 
-Contract.belongsTo(Client, {
-  foreignKey: "clientId",
-  as: "client",
-});
-
 Contract.belongsTo(BillingPriority, {
   foreignKey: "billingPriorityId",
   as: "billingPriority",
+});
+
+MedicBill.belongsTo(Contract, {
+  foreignKey: "contractId",
+  as: "contract",
 });
 
 export default Contract;

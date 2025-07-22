@@ -1,6 +1,5 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
 import ClientBank from "./ClientBank.model";
@@ -12,6 +11,7 @@ import MedicBill from "./MedicBill.model";
 import Contribution from "./Contribution.model";
 import ClientSearch from "./ClientSearch.model";
 import ClientLimit from "./ClientLimit.model";
+import Contract from "./Contract.model";
 
 class Client extends Model {
   declare id: string;
@@ -63,15 +63,15 @@ Client.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     clientBankId: {
       allowNull: true,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "client_banks",
         key: "id",
@@ -81,181 +81,181 @@ Client.init(
     },
     name: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     cpfNumber: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     imageLink: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     password: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     ticketPermission: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
     signedAuthorizationTerm: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
     ente: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     birthdate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
       },
     },
     admissionDate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
       },
     },
     email: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: {
         isEmail: true,
       },
     },
     idCardNumber: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     issuingAgency: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     gender: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     maritalStatus: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     educationLevel: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     details: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     monthlyCredit: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     annualCredit: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     creditLimit: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
       defaultValue: 0,
     },
     phone01: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     phone02: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     bankAccount: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     bankAgency: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     bankCode: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     companyCode: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     pixKey: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     pixType: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     associate: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     associateState: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
     beginningDate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
       },
     },
     retirementDate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
       },
     },
     reRegistration: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
       },
     },
     workPlace: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     department: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     section: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     occupation: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     monthlyType: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     motherName: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     fatherName: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
   },
   {
@@ -276,9 +276,19 @@ Client.belongsTo(ClientBank, {
   as: "clientBank",
 });
 
+ClientBank.hasMany(Client, {
+  foreignKey: "clientBankId",
+  as: "clients",
+});
+
 Client.hasOne(Address, {
   foreignKey: "clientId",
   as: "address",
+});
+
+Address.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
 });
 
 Client.hasMany(Dependent, {
@@ -286,9 +296,29 @@ Client.hasMany(Dependent, {
   as: "dependents",
 });
 
+Dependent.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
+});
+
+Client.hasMany(Contract, {
+  foreignKey: "clientId",
+  as: "contracts",
+});
+
+Contract.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
+});
+
 Client.hasMany(Reservation, {
   foreignKey: "clientId",
   as: "reservations",
+});
+
+Reservation.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
 });
 
 Client.hasMany(ClientHistory, {
@@ -296,9 +326,19 @@ Client.hasMany(ClientHistory, {
   as: "clientHistories",
 });
 
+ClientHistory.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
+});
+
 Client.hasMany(MedicBill, {
   foreignKey: "clientId",
   as: "medicBills",
+});
+
+MedicBill.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
 });
 
 Client.hasMany(Contribution, {
@@ -306,14 +346,29 @@ Client.hasMany(Contribution, {
   as: "contributions",
 });
 
+Contribution.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
+});
+
 Client.hasMany(ClientSearch, {
   foreignKey: "clientId",
   as: "clientSearches",
 });
 
+ClientSearch.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
+});
+
 Client.hasMany(ClientLimit, {
   foreignKey: "clientId",
   as: "clientLimits",
+});
+
+ClientLimit.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
 });
 
 export default Client;

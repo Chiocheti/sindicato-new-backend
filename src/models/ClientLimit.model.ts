@@ -1,9 +1,7 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
-import Client from "./Client.model";
 
 class ClientLimit extends Model {
   declare id: string;
@@ -18,15 +16,15 @@ ClientLimit.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     clientId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clients",
         key: "id",
@@ -36,11 +34,11 @@ ClientLimit.init(
     },
     name: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     limit: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
   },
   {
@@ -55,10 +53,5 @@ ClientLimit.init(
     },
   }
 );
-
-ClientLimit.belongsTo(Client, {
-  foreignKey: "clientId",
-  as: "client",
-});
 
 export default ClientLimit;

@@ -1,6 +1,5 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
 import Bank from "./Bank.model";
@@ -26,15 +25,15 @@ Bill.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     bankId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "banks",
         key: "id",
@@ -44,43 +43,43 @@ Bill.init(
     },
     referenceId: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     clientName: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     date: {
       allowNull: false,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     confirmationDate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     doc: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     value: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     dca: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     status: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     order: {
       allowNull: false,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     details: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
   },
   {

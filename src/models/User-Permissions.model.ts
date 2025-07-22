@@ -2,16 +2,16 @@ import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 
 import db from "./";
+import User from "./User.model";
+import Permission from "./Permission.model";
 
-class Action extends Model {
+class UserPermission extends Model {
   declare id: string;
-  declare clientId: string;
-  declare userId: string;
-  declare action: string;
-  declare reference: string | null;
+  declare roleId: string;
+  declare UserId: string;
 }
 
-Action.init(
+UserPermission.init(
   {
     id: {
       allowNull: false,
@@ -33,18 +33,20 @@ Action.init(
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
-    action: {
+    permissionId: {
       allowNull: false,
-      type: DataTypes.STRING,
-    },
-    reference: {
-      allowNull: true,
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
+      references: {
+        model: "permissions",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
     },
   },
   {
     sequelize: db,
-    tableName: "actions",
+    tableName: "user_permissions",
     timestamps: false,
     underscored: true,
     hooks: {
@@ -55,4 +57,4 @@ Action.init(
   }
 );
 
-export default Action;
+export default UserPermission;

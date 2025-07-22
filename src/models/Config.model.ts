@@ -1,6 +1,5 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
 
@@ -20,37 +19,37 @@ Config.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     amount: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     receiverNumber: {
       allowNull: false,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     actualizedMonthlyCredit: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
     actualizedAnnualCredit: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
     aposentadoPaymentDate: {
       allowNull: false,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     ativoPaymentDate: {
       allowNull: false,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
   },
   {

@@ -1,12 +1,7 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
-import Client from "./Client.model";
-import Service from "./Service.model";
-import Bank from "./Bank.model";
-import Contract from "./Contracts.model";
 
 class MedicBill extends Model {
   declare id: string;
@@ -35,15 +30,15 @@ MedicBill.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     clientId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clients",
         key: "id",
@@ -53,7 +48,7 @@ MedicBill.init(
     },
     serviceId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "services",
         key: "id",
@@ -63,7 +58,7 @@ MedicBill.init(
     },
     bankId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "banks",
         key: "id",
@@ -73,7 +68,7 @@ MedicBill.init(
     },
     contractId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "contracts",
         key: "id",
@@ -83,55 +78,55 @@ MedicBill.init(
     },
     dependentName: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     date: {
       allowNull: false,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     confirmationDate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     reservationDate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     invoiceReceived: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     invoiceValue: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     invoiceCompensate: {
       allowNull: false,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     dca: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     status: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     checkNumber: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     receiverNumber: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     order: {
       allowNull: false,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     canReceiveRefund: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
   },
   {
@@ -146,25 +141,5 @@ MedicBill.init(
     },
   }
 );
-
-MedicBill.belongsTo(Client, {
-  foreignKey: "clientId",
-  as: "client",
-});
-
-MedicBill.belongsTo(Service, {
-  foreignKey: "serviceId",
-  as: "service",
-});
-
-MedicBill.belongsTo(Bank, {
-  foreignKey: "bankId",
-  as: "bank",
-});
-
-MedicBill.belongsTo(Contract, {
-  foreignKey: "contractId",
-  as: "contract",
-});
 
 export default MedicBill;

@@ -1,6 +1,5 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
 
@@ -19,31 +18,31 @@ Benefit.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     title: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     content: {
       allowNull: false,
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
     },
     imageLink: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     infos: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     date: {
       allowNull: false,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
       },

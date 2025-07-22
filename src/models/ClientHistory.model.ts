@@ -1,9 +1,7 @@
-import { Model } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
-import Sequelize from "sequelize";
 
 import db from "./";
-import Client from "./Client.model";
 
 class ClientHistory extends Model {
   declare id: string;
@@ -26,15 +24,15 @@ ClientHistory.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         isUUID: 4,
       },
     },
     clientId: {
       allowNull: false,
-      type: Sequelize.UUID,
+      type: DataTypes.UUID,
       references: {
         model: "clients",
         key: "id",
@@ -44,50 +42,50 @@ ClientHistory.init(
     },
     code: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     order: {
       allowNull: false,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     admissionDate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
       },
     },
     dismissalDate: {
       allowNull: true,
-      type: Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
       },
     },
     pause: {
       allowNull: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
     dismissalReason: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     ente: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     salary: {
       allowNull: true,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     discount: {
       allowNull: true,
-      type: Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
     monthlyType: {
       allowNull: true,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
   },
   {
@@ -102,10 +100,5 @@ ClientHistory.init(
     },
   }
 );
-
-ClientHistory.belongsTo(Client, {
-  foreignKey: "clientId",
-  as: "client",
-});
 
 export default ClientHistory;
