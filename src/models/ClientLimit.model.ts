@@ -43,7 +43,7 @@ ClientLimit.init(
   },
   {
     sequelize: db,
-    tableName: "clientLimits",
+    tableName: "client_limits",
     timestamps: false,
     underscored: true,
     hooks: {

@@ -95,9 +95,4 @@ Bill.init(
   }
 );
 
-Bill.belongsTo(Bank, {
-  foreignKey: "bankId",
-  as: "bank",
-});
-
 export default Bill;

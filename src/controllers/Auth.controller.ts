@@ -3,8 +3,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import User from "../models/User.model";
-
-import { ExpectedApiResponse } from "../Types/ApiTypes";
 import Role from "../models/Role.model";
 import Permission from "../models/Permission.model";
 
@@ -20,38 +18,41 @@ const AuthController = {
     const password: string = req.body.password;
 
     try {
-      const findUser = await User.findOne({ where: { username } });
+      const findUser = await User.findOne({
+        where: { username },
+        attributes: {
+          exclude: ["refreshToken"],
+        },
+        include: [
+          {
+            model: Role,
+            as: "roles",
+            attributes: {
+              exclude: ["id"],
+            },
+          },
+          {
+            model: Permission,
+            as: "permissions",
+            attributes: {
+              exclude: ["id"],
+            },
+          },
+        ],
+      });
 
       if (!findUser) {
-        const apiResponse: ExpectedApiResponse = {
-          success: false,
-          type: 3,
-          data: JSON.stringify("Usuário ou Senha Incorretos"),
-        };
-
-        return res.status(201).json(apiResponse);
+        return res.status(401).json({ message: "Usuário ou Senha Incorretos" });
       }
 
       const isMatch = await bcrypt.compare(password, findUser.password);
 
       if (!isMatch) {
-        const apiResponse: ExpectedApiResponse = {
-          success: false,
-          type: 3,
-          data: JSON.stringify("Usuário ou Senha Incorretos"),
-        };
-
-        return res.status(201).json(apiResponse);
+        return res.status(401).json({ message: "Usuário ou Senha Incorretos" });
       }
 
       if (!REFRESH_TOKEN_SECRET_KEY || !ACCESS_TOKEN_SECRET_KEY) {
-        const apiResponse: ExpectedApiResponse = {
-          success: false,
-          type: 1,
-          data: JSON.stringify("Houve um erro interno"),
-        };
-
-        return res.status(500).json(apiResponse);
+        return res.status(500).json({ message: "Houve um erro interno" });
       }
 
       const accessToken = jwt.sign(
@@ -68,63 +69,37 @@ const AuthController = {
 
       await findUser.update({ refreshToken });
 
-      const apiResponse: ExpectedApiResponse = {
-        success: true,
-        type: 0,
-        data: JSON.stringify({
-          user: findUser,
-          tokens: { accessToken, refreshToken },
-        }),
-      };
-
-      return res.status(200).json(apiResponse);
+      return res.status(200).json({
+        user: findUser,
+        tokens: {
+          accessToken,
+          refreshToken,
+        },
+      });
     } catch (error) {
       console.log(error);
 
-      const apiResponse: ExpectedApiResponse = {
-        success: false,
-        type: 1,
-        data: JSON.stringify("Houve um erro interno"),
-      };
-
-      return res.status(500).json(apiResponse);
+      return res.status(500).json({ message: "Houve um erro interno" });
     }
   },
 
   async logout(req: Request, res: Response) {
     const id: string = req.body.id;
+
     try {
       const findUser = await User.findByPk(id);
 
       if (!findUser) {
-        const apiResponse: ExpectedApiResponse = {
-          success: false,
-          type: 3,
-          data: JSON.stringify("Usuário não encontrado"),
-        };
-
-        return res.status(201).json(apiResponse);
+        return res.status(401).json({ message: "Usuário não encontrado" });
       }
 
       await findUser.update({ refreshToken: null });
 
-      const apiResponse: ExpectedApiResponse = {
-        success: true,
-        type: 0,
-        data: JSON.stringify("Deslogado com sucesso"),
-      };
-
-      return res.status(500).json(apiResponse);
+      return res.status(200).json({ message: "Deslogado com sucesso" });
     } catch (error) {
       console.log(error);
 
-      const apiResponse: ExpectedApiResponse = {
-        success: false,
-        type: 1,
-        data: JSON.stringify("Houve um erro interno"),
-      };
-
-      return res.status(500).json(apiResponse);
+      return res.status(500).json({ message: "Houve um erro interno" });
     }
   },
 };

@@ -90,7 +90,7 @@ ClientHistory.init(
   },
   {
     sequelize: db,
-    tableName: "clientHistory",
+    tableName: "client_history",
     timestamps: false,
     underscored: true,
     hooks: {

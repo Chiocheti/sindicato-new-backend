@@ -2,7 +2,6 @@ import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 
 import db from "./";
-import Bank from "./Bank.model";
 
 class Conciliation extends Model {
   declare id: string;
@@ -84,10 +83,5 @@ Conciliation.init(
     },
   }
 );
-
-Conciliation.belongsTo(Bank, {
-  foreignKey: "bankId",
-  as: "bank",
-});
 
 export default Conciliation;

@@ -81,9 +81,19 @@ Bank.hasMany(Bill, {
   as: "bills",
 });
 
+Bill.belongsTo(Bank, {
+  foreignKey: "bankId",
+  as: "bank",
+});
+
 Bank.hasMany(Conciliation, {
   foreignKey: "bankId",
   as: "conciliations",
+});
+
+Conciliation.belongsTo(Bank, {
+  foreignKey: "bankId",
+  as: "bank",
 });
 
 Bank.hasMany(MedicBill, {
