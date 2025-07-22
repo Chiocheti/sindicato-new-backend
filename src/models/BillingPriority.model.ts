@@ -32,7 +32,7 @@ BillingPriority.init(
   },
   {
     sequelize: db,
-    tableName: "billingPriorities",
+    tableName: "billing_priorities",
     timestamps: false,
     underscored: true,
     hooks: {

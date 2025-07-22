@@ -131,7 +131,7 @@ MedicBill.init(
   },
   {
     sequelize: db,
-    tableName: "medicBills",
+    tableName: "medic_bills",
     timestamps: false,
     underscored: true,
     hooks: {

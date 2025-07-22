@@ -32,7 +32,7 @@ ClientBank.init(
   },
   {
     sequelize: db,
-    tableName: "clientBanks",
+    tableName: "client_banks",
     timestamps: false,
     underscored: true,
     hooks: {

@@ -51,7 +51,7 @@ ClientSearch.init(
   },
   {
     sequelize: db,
-    tableName: "clientSearches",
+    tableName: "client_searches",
     timestamps: false,
     underscored: true,
     hooks: {
