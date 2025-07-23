@@ -43,7 +43,7 @@ module.exports = {
         onDelete: "CASCADE",
       },
       contract_id: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.UUID,
         references: {
           model: "contracts",

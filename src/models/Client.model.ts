@@ -12,6 +12,8 @@ import Contribution from "./Contribution.model";
 import ClientSearch from "./ClientSearch.model";
 import ClientLimit from "./ClientLimit.model";
 import Contract from "./Contract.model";
+import Bill from "./Bill.model";
+import Conciliation from "./Conciliation.model";
 
 class Client extends Model {
   declare id: string;
@@ -327,6 +329,26 @@ Client.hasMany(ClientHistory, {
 });
 
 ClientHistory.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
+});
+
+Client.hasMany(Bill, {
+  foreignKey: "clientId",
+  as: "bills",
+});
+
+Bill.belongsTo(Client, {
+  foreignKey: "clientId",
+  as: "client",
+});
+
+Client.hasMany(Conciliation, {
+  foreignKey: "clientId",
+  as: "conciliations",
+});
+
+Conciliation.belongsTo(Client, {
   foreignKey: "clientId",
   as: "client",
 });

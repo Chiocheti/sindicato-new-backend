@@ -38,8 +38,28 @@ Conciliation.init(
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
-    referenceId: {
-      allowNull: false,
+    client_id: {
+      allowNull: true,
+      type: DataTypes.UUID,
+      references: {
+        model: "clients",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    },
+    service_id: {
+      allowNull: true,
+      type: DataTypes.UUID,
+      references: {
+        model: "services",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    },
+    other: {
+      allowNull: true,
       type: DataTypes.STRING,
     },
     clientName: {

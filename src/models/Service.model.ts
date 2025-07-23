@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import db from "./";
 import MedicBill from "./MedicBill.model";
+import Bill from "./Bill.model";
+import Conciliation from "./Conciliation.model";
 
 class Service extends Model {
   declare id: string;
@@ -68,6 +70,26 @@ Service.init(
     },
   }
 );
+
+Service.hasMany(Bill, {
+  foreignKey: "serviceId",
+  as: "bills",
+});
+
+Bill.belongsTo(Service, {
+  foreignKey: "serviceId",
+  as: "service",
+});
+
+Service.hasMany(Conciliation, {
+  foreignKey: "serviceId",
+  as: "conciliations",
+});
+
+Conciliation.belongsTo(Service, {
+  foreignKey: "serviceId",
+  as: "service",
+});
 
 Service.hasMany(MedicBill, {
   foreignKey: "serviceId",
