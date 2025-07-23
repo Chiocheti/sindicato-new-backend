@@ -22,8 +22,28 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      reference_id: {
-        allowNull: false,
+      client_id: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references: {
+          model: "clients",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      service_id: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references: {
+          model: "services",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      other: {
+        allowNull: true,
         type: Sequelize.STRING,
       },
       client_name: {
@@ -66,6 +86,7 @@ module.exports = {
       },
     });
   },
+
   async down(queryInterface) {
     await queryInterface.dropTable("conciliations");
   },
