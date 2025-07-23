@@ -22,9 +22,25 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      reference_id: {
-        allowNull: false,
-        type: Sequelize.STRING,
+      client_id: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references: {
+          model: "clients",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      service_id: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references: {
+          model: "services",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       client_name: {
         allowNull: false,

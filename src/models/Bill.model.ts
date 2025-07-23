@@ -7,7 +7,8 @@ import Bank from "./Bank.model";
 class Bill extends Model {
   declare id: string;
   declare bankId: string;
-  declare referenceId: string;
+  declare clientId: string | null;
+  declare serviceId: string | null;
   declare clientName: string;
   declare date: string;
   declare confirmationDate: string | null;
@@ -41,9 +42,25 @@ Bill.init(
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
-    referenceId: {
-      allowNull: false,
-      type: DataTypes.STRING,
+    client_id: {
+      allowNull: true,
+      type: DataTypes.UUID,
+      references: {
+        model: "clients",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    },
+    service_id: {
+      allowNull: true,
+      type: DataTypes.UUID,
+      references: {
+        model: "services",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
     },
     clientName: {
       allowNull: false,
