@@ -67,7 +67,7 @@ MedicBill.init(
       onDelete: "CASCADE",
     },
     contractId: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.UUID,
       references: {
         model: "contracts",
