@@ -105,7 +105,7 @@ Refund.belongsTo(Dependent, {
 });
 
 Refund.belongsTo(Specialty, {
-  foreignKey: "specialtyID",
+  foreignKey: "specialtyId",
   as: "specialty",
 });
 
