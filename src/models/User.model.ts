@@ -9,9 +9,11 @@ import Role from "./Role.model";
 import Permission from "./Permission.model";
 import UserRole from "./User-Roles.model";
 import UserPermission from "./User-Permissions.model";
+import Limit from "./Limit.model";
 
 class User extends Model {
   declare id: string;
+  declare limitId: string;
   declare name: string;
   declare username: string;
   declare password: string;
@@ -30,6 +32,16 @@ User.init(
       validate: {
         isUUID: 4,
       },
+    },
+    limitId: {
+      allowNull: true,
+      type: DataTypes.UUID,
+      references: {
+        model: "limits",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "SET NULL",
     },
     name: {
       allowNull: false,
@@ -64,6 +76,16 @@ User.init(
     },
   }
 );
+
+User.belongsTo(Limit, {
+  foreignKey: "limitId",
+  as: "limit",
+});
+
+Limit.hasOne(User, {
+  foreignKey: "limitId",
+  as: "user",
+});
 
 User.belongsToMany(Permission, {
   through: UserPermission,

@@ -5,10 +5,12 @@ import db from "./";
 import Client from "./Client.model";
 import BillingPriority from "./BillingPriority.model";
 import MedicBill from "./MedicBill.model";
+import ClientLimit from "./ClientLimit.model";
 
 class Contract extends Model {
   declare id: string;
   declare clientId: string;
+  declare clientLimitId: string;
   declare billingPriorityId: string;
   declare priority: number;
   declare beneficiary: string;
@@ -38,6 +40,16 @@ Contract.init(
       },
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
+    },
+    clientLimitId: {
+      allowNull: true,
+      type: DataTypes.UUID,
+      references: {
+        model: "client_limits",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "SET NULL",
     },
     billingPriorityId: {
       allowNull: false,
@@ -83,6 +95,16 @@ Contract.init(
     },
   }
 );
+
+Contract.belongsTo(ClientLimit, {
+  foreignKey: "clientLimitId",
+  as: "clientLimit",
+});
+
+ClientLimit.hasMany(Contract, {
+  foreignKey: "clientLimitId",
+  as: "contracts",
+});
 
 Contract.belongsTo(BillingPriority, {
   foreignKey: "billingPriorityId",

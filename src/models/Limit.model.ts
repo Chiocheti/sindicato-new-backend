@@ -2,15 +2,15 @@ import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 
 import db from "./";
+import ClientLimit from "./ClientLimit.model";
+import BillingPriority from "./BillingPriority.model";
 
-class BillingPriority extends Model {
+class Limit extends Model {
   declare id: string;
-  declare limitId: string;
   declare name: string;
-  declare value: number;
 }
 
-BillingPriority.init(
+Limit.init(
   {
     id: {
       allowNull: false,
@@ -22,28 +22,14 @@ BillingPriority.init(
         isUUID: 4,
       },
     },
-    limitId: {
-      allowNull: true,
-      type: DataTypes.UUID,
-      references: {
-        model: "limits",
-        key: "id",
-      },
-      onUpdate: "CASCADE",
-      onDelete: "SET NULL",
-    },
     name: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    value: {
-      allowNull: false,
-      type: DataTypes.INTEGER,
-    },
   },
   {
     sequelize: db,
-    tableName: "billing_priorities",
+    tableName: "limits",
     timestamps: false,
     underscored: true,
     hooks: {
@@ -54,4 +40,24 @@ BillingPriority.init(
   }
 );
 
-export default BillingPriority;
+Limit.hasMany(ClientLimit, {
+  foreignKey: "limitId",
+  as: "clientLimits",
+});
+
+ClientLimit.belongsTo(Limit, {
+  foreignKey: "limitId",
+  as: "limit",
+});
+
+Limit.hasMany(BillingPriority, {
+  foreignKey: "limitId",
+  as: "billingPriorities",
+});
+
+BillingPriority.belongsTo(Limit, {
+  foreignKey: "limitId",
+  as: "limit",
+});
+
+export default Limit;
