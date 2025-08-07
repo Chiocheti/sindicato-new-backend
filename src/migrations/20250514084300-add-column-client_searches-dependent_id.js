@@ -6,17 +6,24 @@ module.exports = {
       after: "user_id",
     });
 
-    await queryInterface.addConstraint("client_searches", {
-      fields: ["dependent_id"],
-      type: "foreign key",
-      name: "fk_dependent_id",
-      references: {
-        table: "Dependents",
-        field: "id",
+    await queryInterface.addConstraint(
+      "client_searches",
+      {
+        fields: ["dependent_id"],
+        type: "foreign key",
+        name: "fk_dependent_id",
+        references: {
+          table: "Dependents",
+          field: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
-      onUpdate: "CASCADE",
-      onDelete: "SET NULL",
-    });
+      {
+        charset: "utf8mb4",
+        collate: "utf8mb4_bin",
+      }
+    );
   },
 
   down: async (queryInterface) => {

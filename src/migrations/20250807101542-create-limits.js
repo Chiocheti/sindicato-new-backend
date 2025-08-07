@@ -2,7 +2,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
-      "banks",
+      "limits",
       {
         id: {
           allowNull: false,
@@ -14,37 +14,9 @@ module.exports = {
             isUUID: 4,
           },
         },
-        bank: {
+        name: {
           allowNull: false,
           type: Sequelize.STRING,
-        },
-        type: {
-          allowNull: false,
-          type: Sequelize.STRING,
-        },
-        agency: {
-          allowNull: false,
-          type: Sequelize.STRING,
-        },
-        account: {
-          allowNull: false,
-          type: Sequelize.STRING,
-        },
-        monthly: {
-          allowNull: false,
-          type: Sequelize.DECIMAL(10, 2),
-        },
-        over: {
-          allowNull: false,
-          type: Sequelize.DECIMAL(10, 2),
-        },
-        reserved: {
-          allowNull: false,
-          type: Sequelize.DECIMAL(10, 2),
-        },
-        check_number: {
-          allowNull: false,
-          type: Sequelize.INTEGER,
         },
         created_at: {
           allowNull: false,
@@ -63,7 +35,8 @@ module.exports = {
       }
     );
   },
+
   async down(queryInterface) {
-    await queryInterface.dropTable("banks");
+    await queryInterface.dropTable("limits");
   },
 };
