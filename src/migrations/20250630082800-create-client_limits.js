@@ -28,7 +28,7 @@ module.exports = {
           allowNull: false,
           type: Sequelize.STRING,
         },
-        limit: {
+        limit_value: {
           allowNull: false,
           type: Sequelize.DECIMAL(10, 2),
         },
