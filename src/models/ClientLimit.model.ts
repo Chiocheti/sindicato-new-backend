@@ -6,8 +6,9 @@ import db from "./";
 class ClientLimit extends Model {
   declare id: string;
   declare clientId: string;
+  declare limitId: string;
   declare name: string;
-  declare limit: number;
+  declare limitValue: number;
 }
 
 ClientLimit.init(
@@ -32,11 +33,21 @@ ClientLimit.init(
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
+    limitId: {
+      allowNull: false,
+      type: DataTypes.UUID,
+      references: {
+        model: "limits",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    },
     name: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    limit: {
+    limitValue: {
       allowNull: false,
       type: DataTypes.DECIMAL(10, 2),
     },
