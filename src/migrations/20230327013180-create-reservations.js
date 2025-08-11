@@ -24,27 +24,7 @@ module.exports = {
           onUpdate: "CASCADE",
           onDelete: "CASCADE",
         },
-        contract_id_first: {
-          allowNull: true,
-          type: Sequelize.UUID,
-          references: {
-            model: "contracts",
-            key: "id",
-          },
-          onUpdate: "CASCADE",
-          onDelete: "SET NULL",
-        },
-        contract_id_second: {
-          allowNull: true,
-          type: Sequelize.UUID,
-          references: {
-            model: "contracts",
-            key: "id",
-          },
-          onUpdate: "CASCADE",
-          onDelete: "SET NULL",
-        },
-        date: {
+        reservation_date: {
           allowNull: false,
           type: Sequelize.DATEONLY,
         },
@@ -67,6 +47,16 @@ module.exports = {
         value: {
           allowNull: true,
           type: Sequelize.DECIMAL(10, 2),
+        },
+        is_locked: {
+          allowNull: false,
+          type: Sequelize.BOOLEAN,
+          defaultValue: false,
+        },
+        is_canceled: {
+          allowNull: false,
+          type: Sequelize.BOOLEAN,
+          defaultValue: false,
         },
         pay_style: {
           allowNull: false,

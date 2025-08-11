@@ -2,19 +2,18 @@ import { DataTypes, Model } from "sequelize";
 import { v4 as uuidv4 } from "uuid";
 
 import db from "./";
-import Contract from "./Contract.model";
 
 class Reservation extends Model {
   declare id: string;
   declare clientId: string;
-  declare contractIdFirst: string | null;
-  declare contractIdSecond: string | null;
-  declare date: string;
+  declare reservationDate: string;
   declare createDate: string;
   declare name: string | null;
   declare cpf: string | null;
   declare phone: string | null;
   declare value: number | null;
+  declare isLocked: boolean;
+  declare isCanceled: boolean;
   declare payStyle: string;
   declare payDateFirst: string | null;
   declare payDateSecond: string | null;
@@ -43,27 +42,7 @@ Reservation.init(
       onUpdate: "CASCADE",
       onDelete: "CASCADE",
     },
-    contractIdFirst: {
-      allowNull: true,
-      type: DataTypes.UUID,
-      references: {
-        model: "contracts",
-        key: "id",
-      },
-      onUpdate: "CASCADE",
-      onDelete: "SET NULL",
-    },
-    contractIdSecond: {
-      allowNull: true,
-      type: DataTypes.UUID,
-      references: {
-        model: "contracts",
-        key: "id",
-      },
-      onUpdate: "CASCADE",
-      onDelete: "SET NULL",
-    },
-    date: {
+    reservationDate: {
       allowNull: false,
       type: DataTypes.DATEONLY,
     },
@@ -86,6 +65,16 @@ Reservation.init(
     value: {
       allowNull: true,
       type: DataTypes.DECIMAL(10, 2),
+    },
+    isLocked: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    isCanceled: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     payStyle: {
       allowNull: false,
@@ -116,15 +105,5 @@ Reservation.init(
     },
   }
 );
-
-Reservation.belongsTo(Contract, {
-  foreignKey: "contractIdFirst",
-  as: "contractFirst",
-});
-
-Reservation.belongsTo(Contract, {
-  foreignKey: "contractIdSecond",
-  as: "contractSecond",
-});
 
 export default Reservation;
