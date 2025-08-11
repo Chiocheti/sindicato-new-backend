@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.model";
 import Role from "../models/Role.model";
 import Permission from "../models/Permission.model";
+import sequelize from "../models";
 
 const ACCESS_TOKEN_SECRET_KEY = process.env.ACCESS_TOKEN_SECRET_KEY;
 const REFRESH_TOKEN_SECRET_KEY = process.env.REFRESH_TOKEN_SECRET_KEY;
@@ -17,26 +18,20 @@ const AuthController = {
     const username: string = req.body.username;
     const password: string = req.body.password;
 
+    console.log(" > Start Transaction");
+    const transaction = await sequelize.transaction();
+
     try {
       const findUser = await User.findOne({
         where: { username },
-        attributes: {
-          exclude: ["refreshToken"],
-        },
         include: [
           {
             model: Role,
             as: "roles",
-            attributes: {
-              exclude: ["id"],
-            },
           },
           {
             model: Permission,
             as: "permissions",
-            attributes: {
-              exclude: ["id"],
-            },
           },
         ],
       });
@@ -67,7 +62,10 @@ const AuthController = {
         { expiresIn: REFRESH_TOKEN_DURATION }
       );
 
-      await findUser.update({ refreshToken });
+      await findUser.update({ refreshToken }, { transaction });
+
+      console.log(" > Commit Transaction");
+      await transaction.commit();
 
       return res.status(200).json({
         user: findUser,
@@ -78,13 +76,17 @@ const AuthController = {
       });
     } catch (error) {
       console.log(error);
-
+      console.log(" > Rollback Transaction");
+      await transaction.rollback();
       return res.status(500).json({ message: "Houve um erro interno" });
     }
   },
 
   async logout(req: Request, res: Response) {
     const id: string = req.body.id;
+
+    console.log(" > Start Transaction");
+    const transaction = await sequelize.transaction();
 
     try {
       const findUser = await User.findByPk(id);
@@ -93,11 +95,16 @@ const AuthController = {
         return res.status(401).json({ message: "Usuário não encontrado" });
       }
 
-      await findUser.update({ refreshToken: null });
+      await findUser.update({ refreshToken: null }, { transaction });
+
+      console.log(" > Commit Transaction");
+      await transaction.commit();
 
       return res.status(200).json({ message: "Deslogado com sucesso" });
     } catch (error) {
       console.log(error);
+      console.log(" > Rollback Transaction");
+      await transaction.rollback();
 
       return res.status(500).json({ message: "Houve um erro interno" });
     }
